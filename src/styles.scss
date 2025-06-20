@@ -14,32 +14,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   right: 1rem;
 }
 
-.toast-success {
-  background-color: #4CAF50 !important;
-  color: #fff !important;
-  font-weight: 500;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.toast-error {
-  background-color: #F44336 !important;
-  color: #fff !important;
-  font-weight: 500;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
 .toast-message {
   padding-left: 8px;
-}
-
-.toast-success, .toast-error {
-  padding: 12px 16px !important;        
-  min-width: 280px;                     
-  border-radius: 6px !important;
-  font-size: 15px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
 }
 
 .toast-title {
