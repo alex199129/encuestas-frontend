@@ -1,27 +1,34 @@
-# FrontendEncuestas
+# Plataforma Encuestas - Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Este proyecto es el frontend de la plataforma de encuestas desarrollada en **Angular 16**. Permite a usuarios autenticados gestionar encuestas y a usuarios externos responderlas desde una interfaz pública.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tecnologías utilizadas
 
-## Code scaffolding
+- Angular 16
+- Angular Material
+- Bootstrap 5
+- RxJS
+- TypeScript
+- SCSS / HTML
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## Funcionalidades clave
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Registro y autenticación de usuarios
+- Creación, edición y eliminación de encuestas
+- Formulario dinámico con distintos tipos de preguntas (texto, párrafo, selección, etc.)
+- Compartir encuestas mediante `slug` público
+- Visualización de resultados con gráficas (Charts)
+- Diseño responsivo para escritorio y móvil
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Cómo ejecutar el proyecto
 
-## Running end-to-end tests
+1. Clona el repositorio:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+   ```bash
+   git clone https://github.com/alex199129/encuestas-frontend.git
