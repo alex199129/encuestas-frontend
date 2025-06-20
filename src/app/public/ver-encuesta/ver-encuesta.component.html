@@ -18,13 +18,14 @@
           <div *ngFor="let opcion of pregunta.opciones">
             <input
               type="radio"
-              [value]="opcion.toString()"
+              [value]="opcion.texto"
               formControlName="valor"
               class="form-check-input me-2"
             />
-            {{ opcion }}
+            {{ opcion.texto }}
           </div>
         </div>
+
 
        <!-- OPCION_MULTIPLE -->
       <div *ngIf="pregunta.tipo === 'OPCION_MULTIPLE'">
@@ -36,7 +37,7 @@
             [id]="'check-' + i + '-' + j"
           />
           <label class="form-check-label" [for]="'check-' + i + '-' + j">
-            {{ opcion }}
+            {{ opcion.texto }}
           </label>
         </div>
       </div>

@@ -36,6 +36,7 @@ export class LoginComponent {
     this.authService.login(email, password).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('usuario', response.usuario);
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {

@@ -7,11 +7,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+
+  usuario: string = '';
+
+  constructor(private router: Router) {
+    const usuario = localStorage.getItem('usuario');
+    this.usuario = usuario ?? '';
+  }
 
   get showLogout(): boolean {
     return this.router.url !== '/auth/login' && this.router.url !== '/auth/register';
   }
+
+
 
   logout(): void {
     localStorage.removeItem('token');

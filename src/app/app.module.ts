@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ResultadoComponent } from './encuestas/resultado/resultado.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ResultadoComponent } from './encuestas/resultado/resultado.component';
     BrowserAnimationsModule,
     HttpClientModule,
     ClipboardModule,
+    NgChartsModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-top-right',

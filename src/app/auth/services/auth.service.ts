@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 interface LoginResponse {
   token: string;
+  usuario: string;
 }
 
 @Injectable({
@@ -25,6 +26,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
   }
 
   isAuthenticated(): boolean {

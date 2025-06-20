@@ -1,6 +1,12 @@
 <div class="container mt-4">
   <h2>Crear nueva encuesta</h2>
 
+  <div class="d-flex justify-content-start mb-3">
+    <button class="btn btn-outline-secondary" (click)="volverAlDashboard()">
+      ← Volver al Dashboard
+    </button>
+  </div>
+
   <form [formGroup]="encuestaForm" (ngSubmit)="onSubmit()">
     <!-- Título -->
     <div class="mb-3">

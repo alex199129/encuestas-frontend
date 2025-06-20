@@ -74,7 +74,11 @@ export class VerEncuestaComponent implements OnInit {
       let valor: any;
 
       if (pregunta.tipo === 'OPCION_MULTIPLE') {
-        valor = pregunta.opciones.filter((_: any, i: number) => control[i]);
+      const seleccionadas = this.getCheckboxControlArray(index)
+        .map((control, j) => control.value ? pregunta.opciones[j].texto : null)
+        .filter((texto): texto is string => texto !== null);
+
+        valor = seleccionadas.join(','); 
       } else {
         valor = control;
       }
@@ -101,5 +105,12 @@ export class VerEncuestaComponent implements OnInit {
     const formArray = this.respuestasFormArray.at(preguntaIndex).get('valor') as FormArray;
     return formArray.at(opcionIndex) as FormControl;
   }
+
+  getCheckboxControlArray(i: number): FormControl[] {
+  const formGroup = this.respuestaForm.get('respuestas') as FormArray;
+  const preguntaGroup = formGroup.at(i) as FormGroup;
+  const valorArray = preguntaGroup.get('valor') as FormArray;
+  return valorArray.controls as FormControl[];
+}
 
 }

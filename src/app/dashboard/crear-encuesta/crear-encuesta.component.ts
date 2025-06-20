@@ -73,7 +73,18 @@ export class CrearEncuestaComponent {
   onSubmit(): void {
     if (this.encuestaForm.invalid) return;
 
-    const encuesta = this.encuestaForm.value;
+    const formValue = this.encuestaForm.value;
+
+    const encuesta = {
+      ...formValue,
+      preguntas: formValue.preguntas.map((pregunta: any) => ({
+        texto: pregunta.texto,
+        tipo: pregunta.tipo,
+        opciones: ['OPCION_MULTIPLE', 'SELECCION_UNICA'].includes(pregunta.tipo)
+          ? pregunta.opciones.map((texto: string) => ({ texto }))
+          : []
+      }))
+    };
 
     const peticion = this.modoEdicion
       ? this.encuestaService.actualizarEncuesta(this.idEncuesta, encuesta)
@@ -90,7 +101,6 @@ export class CrearEncuestaComponent {
       }
     });
   }
-
 
   getOpciones(pregunta: AbstractControl): FormArray {
     return pregunta.get('opciones') as FormArray;
@@ -117,14 +127,18 @@ export class CrearEncuestaComponent {
 
         if (['OPCION_MULTIPLE', 'SELECCION_UNICA'].includes(pregunta.tipo)) {
           const opcionesArray = grupo.get('opciones') as FormArray;
-          opciones.forEach((op: string) => {
-            opcionesArray.push(this.fb.control(op, Validators.required));
+          opciones.forEach((op: any) => {
+            opcionesArray.push(this.fb.control(op.texto, Validators.required));
           });
         }
 
         preguntasFormArray.push(grupo);
       });
     });
+  }
+
+  volverAlDashboard(): void {
+    this.router.navigate(['/dashboard']);
   }
 
 }
