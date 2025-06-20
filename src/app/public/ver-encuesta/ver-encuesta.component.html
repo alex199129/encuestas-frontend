@@ -1,0 +1,49 @@
+<div class="container mt-4" *ngIf="encuesta">
+  <h2>{{ encuesta.titulo }}</h2>
+  <p>{{ encuesta.descripcion }}</p>
+
+  <form [formGroup]="respuestaForm" (ngSubmit)="onSubmit()">
+    <div formArrayName="respuestas">
+      <div *ngFor="let pregunta of encuesta.preguntas; let i = index" [formGroupName]="i" class="mb-3">
+        <label class="form-label">{{ pregunta.texto }}</label>
+
+        <!-- TEXTO_CORTO -->
+        <input *ngIf="pregunta.tipo === 'TEXTO_CORTO'" type="text" class="form-control" formControlName="valor" />
+
+        <!-- PARRAFO -->
+        <textarea *ngIf="pregunta.tipo === 'PARRAFO'" class="form-control" formControlName="valor"></textarea>
+
+        <!-- SELECCION_UNICA -->
+        <div *ngIf="pregunta.tipo === 'SELECCION_UNICA'">
+          <div *ngFor="let opcion of pregunta.opciones">
+            <input
+              type="radio"
+              [value]="opcion.toString()"
+              formControlName="valor"
+              class="form-check-input me-2"
+            />
+            {{ opcion }}
+          </div>
+        </div>
+
+       <!-- OPCION_MULTIPLE -->
+      <div *ngIf="pregunta.tipo === 'OPCION_MULTIPLE'">
+        <div *ngFor="let opcion of pregunta.opciones; let j = index" class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            [formControl]="getCheckboxControl(i, j)"
+            [id]="'check-' + i + '-' + j"
+          />
+          <label class="form-check-label" [for]="'check-' + i + '-' + j">
+            {{ opcion }}
+          </label>
+        </div>
+      </div>
+
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Enviar respuestas</button>
+  </form>
+</div>

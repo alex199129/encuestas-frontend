@@ -1,0 +1,56 @@
+<div class="container mt-4">
+  <h2>Crear nueva encuesta</h2>
+
+  <form [formGroup]="encuestaForm" (ngSubmit)="onSubmit()">
+    <!-- Título -->
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título</label>
+      <input id="titulo" formControlName="titulo" class="form-control"
+             [class.is-invalid]="encuestaForm.get('titulo')?.invalid && encuestaForm.get('titulo')?.touched">
+      <div class="invalid-feedback" *ngIf="encuestaForm.get('titulo')?.invalid && encuestaForm.get('titulo')?.touched">
+        El título es obligatorio.
+      </div>
+    </div>
+
+    <!-- Descripción -->
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea id="descripcion" formControlName="descripcion" class="form-control"
+                [class.is-invalid]="encuestaForm.get('descripcion')?.invalid && encuestaForm.get('descripcion')?.touched"></textarea>
+      <div class="invalid-feedback" *ngIf="encuestaForm.get('descripcion')?.invalid && encuestaForm.get('descripcion')?.touched">
+        La descripción es obligatoria.
+      </div>
+    </div>
+
+    <!-- Lista de preguntas -->
+    <div formArrayName="preguntas">
+      <div *ngFor="let pregunta of preguntas.controls; let i = index" [formGroupName]="i" class="card p-3 mb-3">
+        <label>Texto de la pregunta</label>
+        <input formControlName="texto" class="form-control mb-2" placeholder="Pregunta">
+
+        <label>Tipo de campo</label>
+        <select formControlName="tipo" class="form-select mb-2">
+            <option *ngFor="let tipo of tiposPregunta" [value]="tipo.value">{{ tipo.label }}</option>
+        </select>
+
+        <!-- Opciones solo si el tipo es 'opciones' -->
+        <div *ngIf="['OPCION_MULTIPLE', 'SELECCION_UNICA'].includes(pregunta.get('tipo')?.value)">
+          <label>Opciones</label>
+          <div formArrayName="opciones">
+            <div *ngFor="let opcion of getOpciones(pregunta).controls; let j = index" class="input-group mb-2">
+              <input [formControlName]="j" class="form-control" placeholder="Opción {{ j + 1 }}">
+              <button class="btn btn-outline-danger" type="button" (click)="eliminarOpcion(i, j)">X</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline-secondary btn-sm mt-1" (click)="agregarOpcion(i)">+ Agregar opción</button>
+        </div>
+
+        <button type="button" class="btn btn-outline-danger mt-2" (click)="eliminarPregunta(i)">Eliminar pregunta</button>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-outline-primary mb-3" (click)="agregarPregunta()">+ Agregar pregunta</button>
+    <br>
+    <button type="submit" class="btn btn-success">Guardar encuesta</button>
+  </form>
+</div>

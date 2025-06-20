@@ -1,0 +1,40 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Mis Encuestas</h2>
+    <button class="btn btn-primary" routerLink="/dashboard/crear">+ Crear nueva encuesta</button>
+  </div>
+
+  <div *ngIf="encuestas.length > 0; else sinEncuestas">
+    <div class="card mb-3" *ngFor="let encuesta of encuestas">
+      <div class="card-body">
+        <h5 class="card-title">{{ encuesta.titulo }}</h5>
+        <p class="card-text">{{ encuesta.descripcion }}</p>
+        <!-- 
+        <small class="text-muted">Creada: {{ encuesta.fechaCreacion | date:'mediumDate' }}</small>
+        -->
+        <div class="d-flex justify-content-end gap-2 mt-2">
+          <button class="btn btn-outline-primary btn-sm" (click)="editarEncuesta(encuesta.id)">
+            🖊 Editar
+          </button>
+
+          <button class="btn btn-outline-danger btn-sm" (click)="eliminarEncuesta(encuesta.id)">
+            🗑 Eliminar
+          </button>
+
+          <button class="btn btn-outline-secondary btn-sm" (click)="verResultados(encuesta.id)">
+            📊 Resultados
+          </button>
+
+          <button class="btn btn-outline-dark btn-sm" (click)="copiarLinkPublico(encuesta.slug)">
+            🔗 Copiar link público
+          </button>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #sinEncuestas>
+    <p class="text-muted">Aún no tienes encuestas registradas.</p>
+  </ng-template>
+</div>

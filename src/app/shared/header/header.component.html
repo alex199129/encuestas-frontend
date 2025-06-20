@@ -1,0 +1,10 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
+  <a class="navbar-brand" href="#">Plataforma de Encuestas Davivienda</a>
+
+  <div class="ms-auto d-flex align-items-center" *ngIf="showLogout">
+    <span class="text-white me-3">
+      nombreUsuario
+    </span>
+    <button class="btn btn-outline-light btn-sm" (click)="logout()">Cerrar sesión</button>
+  </div>
+</nav>

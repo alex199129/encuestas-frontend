@@ -1,0 +1,28 @@
+<div *ngIf="resultado">
+  <h2>{{ resultado.titulo }}</h2>
+
+  <div *ngFor="let pregunta of resultado.preguntas" class="mt-4">
+    <h5>{{ pregunta.texto }}</h5>
+
+    <!-- Preguntas abiertas -->
+    <ul *ngIf="pregunta.tipo === 'PARRAFO' || pregunta.tipo === 'TEXTO_CORTO'">
+      <li *ngFor="let r of pregunta.respuestas">{{ r.valor }}</li>
+    </ul>
+
+    <!-- Preguntas con conteo -->
+    <table *ngIf="pregunta.tipo !== 'PARRAFO' && pregunta.tipo !== 'TEXTO_CORTO'" class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Opción</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of pregunta.respuestas">
+          <td>{{ r.valor }}</td>
+          <td>{{ r.cantidad }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
